@@ -12,12 +12,32 @@
         <nav id="nav-bar">
             <header class="nav-header">Class In Python</header>
             <div class="nav-a">
-                <a class="nav-link" href="#classs">Classes</a>
+                <a class="nav-link" href="#names-and-object">Names And Object</a>
+                <a class="nav-link" href="#scopes-and-namespace">Scope And Namespaces</a>
                 <ul>
                     <li>
-                        <a class='nav-link-sub' href="#names-and-object">Names And Object</a>
+                        <a class='nav-link-sub' href="#scopes-and-namespace-examples">Scope And Namespaces Examples</a>
                     </li>
                 </ul>
+                <a class="nav-link" href="#look-at-classes">A look at Classes</a>
+                <ul>
+                    <li>
+                        <a class='nav-link-sub' href="#defination-syntax">Class Definition Syntax</a>
+                    </li>
+                    <li>
+                        <a href="#class-object" class="nav-link-sub">Class Objects</a>
+                    </li>
+                    <li>
+                        <a href="#instance-object" class="nav-link-sub">Instance Objects</a>
+                    </li>
+                    <li>
+                        <a href="#method-object" class="nav-link-sub">Method Objects</a>
+                    </li>
+                    <li>
+                        <a href="#class-variables" class="nav-link-sub">Class and Instance Variables</a>
+                    </li>
+                </ul>
+                
             </div>
             
         </nav>
@@ -55,7 +75,7 @@
                                 Let’s begin with some definitions.
                             </p>
                             <p>
-                                A namespace is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future. Examples of namespaces are: the set of built-in names (containing functions such as<code>abs()</code> , and built-in exception names); the global names in a module; and the local names in a function invocation. In a sense the set of attributes of an object also form a namespace. The important thing to know about namespaces is that there is absolutely no relation between names in different namespaces; for instance, two different modules may both define a function maximize without confusion — users of the modules must prefix it with the module name.
+                                A namespace is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries, but that’s normally not noticeable in any way (except for performance), and it may change in the future. Examples of namespaces are: the set of built-in names (containing functions such as <code>abs()</code> , and built-in exception names); the global names in a module; and the local names in a function invocation. In a sense the set of attributes of an object also form a namespace. The important thing to know about namespaces is that there is absolutely no relation between names in different namespaces; for instance, two different modules may both define a function maximize without confusion — users of the modules must prefix it with the module name.
                             </p>
                             <p>
                                 By the way, I use the word attribute for any name following a dot — for example, in the expression z.real, real is an attribute of the object z. Strictly speaking, references to names in modules are attribute references: in the expression modname.funcname, modname is a module object and funcname is an attribute of it. In this case there happens to be a straightforward mapping between the module’s attributes and the global names defined in the module: they share the same namespace! 
@@ -103,6 +123,197 @@
                             <p>
                                 The global statement can be used to indicate that particular variables live in the global scope and should be rebound there; the nonlocal statement indicates that particular variables live in an enclosing scope and should be rebound there.
                             </p>
+                        
+                            <ul>
+                            <li>
+                                <h1 class="sub-sub-title" id="scopes-and-namespace-examples"> Scopes and Namespaces Example</h1>
+                                <p>
+                                    This is an example demonstrating how to reference the different scopes and namespaces, and how global and nonlocal affect variable binding:
+                                </p>
+                                <code>
+                                    def scope_test(): <br>
+                                        def do_local():<br>
+                                            spam = "local spam"<br>
+                                            <br>
+                                        def do_nonlocal():<br>
+                                            nonlocal spam<br>
+                                            spam = "nonlocal spam"<br>
+                                            <br>
+                                        def do_global():<br>
+                                            global spam<br>
+                                            spam = "global spam"<br>
+                                            <br>
+                                        spam = "test spam"<br>
+                                        do_local()<br>
+                                        print("After local assignment:", spam)<br>
+                                        do_nonlocal()<br>
+                                        print("After nonlocal assignment:", spam)<br>
+                                        do_global()<br>
+                                        print("After global assignment:", spam)<br>
+
+                                    scope_test()<br>
+                                    print("In global scope:", spam)<br>
+                                </code>
+                                <p>
+                                    The output of the example code is:
+                                </p>
+                                    <code>
+                                    After local assignment: test spam<br>
+                                    After nonlocal assignment: nonlocal spam<br>
+                                    After global assignment: nonlocal spam<br>
+                                    In global scope: global spam<br>
+                                    </code>
+                                    <p>
+                                        Note how the local assignment (which is default) didn’t change scope_test’s binding of spam. The nonlocal assignment changed scope_test’s binding of spam, and the global assignment changed the module-level binding.
+                                    </p>
+                                    <p>
+                                        You can also see that there was no previous binding for spam before the global assignment.
+                                    </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h1 class="sub-title" id="look-at-classes">A First Look at Classes</h1>
+                            <p>
+                                Classes introduce a little bit of new syntax, three new object types, and some new semantics.
+                            </p>
+                            <ul>
+                                <li>
+                                    <h1 class='sub-sub-title' id="defination-syntax">Class Definition Syntax</h1>
+                                    <p>
+                                        The simplest form of class definition looks like this:
+                                    </p>
+                                    <code>
+                                        class ClassName:<br>
+                                            statement-1 <br>
+                                            .<br>
+                                            .<br>
+                                            .<br>
+                                            statement-N
+                                    </code>
+                                    <p>
+                                        Class definitions, like function definitions (def statements) must be executed before they have any effect. (You could conceivably place a class definition in a branch of an if statement, or inside a function.)
+                                    </p>
+                                    <p>
+                                        In practice, the statements inside a class definition will usually be function definitions, but other statements are allowed, and sometimes useful — we’ll come back to this later. The function definitions inside a class normally have a peculiar form of argument list, dictated by the calling conventions for methods — again, this is explained later.
+                                    </p>
+                                    <p>
+                                        When a class definition is entered, a new namespace is created, and used as the local scope — thus, all assignments to local variables go into this new namespace. In particular, function definitions bind the name of the new function here.
+                                    </p>
+                                    <p>
+                                        When a class definition is left normally (via the end), a class object is created. This is basically a wrapper around the contents of the namespace created by the class definition; we’ll learn more about class objects in the next section. The original local scope (the one in effect just before the class definition was entered) is reinstated, and the class object is bound here to the class name given in the class definition header (ClassName in the example).
+                                    </p>
+                                </li>
+                                <li>
+                                    <h1 class="sub-sub-title" id="class-object">Class Objects</h1>
+                                    <p>
+                                        Class objects support two kinds of operations: attribute references and instantiation.
+                                    </p>
+                                    <p>
+                                        Attribute references use the standard syntax used for all attribute references in Python: obj.name. Valid attribute names are all the names that were in the class’s namespace when the class object was created. So, if the class definition looked like this:
+                                    </p>
+                                    <code>
+                                        class MyClass: <br>
+                                        """A simple example class"""<br>
+                                        i = 12345<br>
+                                        <br>
+                                        def f(self):<br>
+                                            return 'hello world'<br>
+                                    </code>
+                                    <p>
+                                        then MyClass.i and MyClass.f are valid attribute references, returning an integer and a function object, respectively. Class attributes can also be assigned to, so you can change the value of MyClass.i by assignment. __doc__ is also a valid attribute, returning the docstring belonging to the class: "A simple example class".
+                                    </p>
+                                    <p>
+                                        Class instantiation uses function notation. Just pretend that the class object is a parameterless function that returns a new instance of the class. For example (assuming the above class):
+                                    </p>
+                                    <code>
+                                        x = MyClass()
+                                    </code>
+                                    <p>
+                                        creates a new instance of the class and assigns this object to the local variable x.
+                                    </p>
+                                    <p>
+                                        The instantiation operation (“calling” a class object) creates an empty object. Many classes like to create objects with instances customized to a specific initial state. Therefore a class may define a special method named __init__(), like this:
+                                    </p>
+                                    <code>
+                                        def __init__(self): <br>
+                                        self.data = []
+                                    </code>
+                                    <p>
+                                        When a class defines an __init__() method, class instantiation automatically invokes __init__() for the newly-created class instance. So in this example, a new, initialized instance can be obtained by:
+                                    </p>
+                                    <code>
+                                        x = MyClass()
+                                    </code>
+                                    <p>
+                                        Of course, the __init__() method may have arguments for greater flexibility. In that case, arguments given to the class instantiation operator are passed on to __init__(). For example,
+                                    </p>
+                                    <code>
+                                        >>> class Complex: <br>
+                                        ...     def __init__(self, realpart, imagpart):<br>
+                                        ...         self.r = realpart<br>
+                                        ...         self.i = imagpart<br>
+                                        ...<br>
+                                        >>> x = Complex(3.0, -4.5)<br>
+                                        >>> x.r, x.i<br>
+                                        (3.0, -4.5)<br>
+                                    </code>
+                                </li>
+                                <li>
+                                    <h1 class="sub-sub-title" id="instance-object">Instance Objects</h1>
+                                    <p>
+                                        Now what can we do with instance objects? The only operations understood by instance objects are attribute references. There are two kinds of valid attribute names: data attributes and methods.
+                                    </p>
+                                    <p>
+                                        data attributes correspond to “instance variables” in Smalltalk, and to “data members” in C++. Data attributes need not be declared; like local variables, they spring into existence when they are first assigned to. For example, if x is the instance of MyClass created above, the following piece of code will print the value 16, without leaving a trace:
+                                    </p>
+                                    <code>
+                                        x.counter = 1 <br>
+                                        while x.counter < 10:<br>
+                                            x.counter = x.counter * 2<br>
+                                        print(x.counter)<br>
+                                        del x.counter<br>
+                                    </code>
+                                    <p>
+                                        The other kind of instance attribute reference is a method. A method is a function that “belongs to” an object. (In Python, the term method is not unique to class instances: other object types can have methods as well. For example, list objects have methods called append, insert, remove, sort, and so on. However, in the following discussion, we’ll use the term method exclusively to mean methods of class instance objects, unless explicitly stated otherwise.)
+                                    </p>
+                                    <p>
+                                        Valid method names of an instance object depend on its class. By definition, all attributes of a class that are function objects define corresponding methods of its instances. So in our example, x.f is a valid method reference, since MyClass.f is a function, but x.i is not, since MyClass.i is not. But x.f is not the same thing as MyClass.f — it is a method object, not a function object.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h1 id='method-object' class="sub-sub-title">Method Objects</h1>
+                                    <p>
+                                        Usually, a method is called right after it is bound:
+                                    </p>
+                                    <code>
+                                        x.f()
+                                    </code>
+                                    <p>
+                                        In the MyClass example, this will return the string 'hello world'. However, it is not necessary to call a method right away: x.f is a method object, and can be stored away and called at a later time. For example:
+                                    </p>
+                                    <code>
+                                        xf = x.f <br>
+                                            while True:<br>
+                                                print(xf())<br>
+                                    </code>
+                                    <p>
+                                        will continue to print hello world until the end of time.
+                                    </p>
+                                    <p>
+                                        What exactly happens when a method is called? You may have noticed that x.f() was called without an argument above, even though the function definition for f() specified an argument. What happened to the argument? Surely Python raises an exception when a function that requires an argument is called without any — even if the argument isn’t actually used…
+                                    </p>
+                                    <p>
+                                        Actually, you may have guessed the answer: the special thing about methods is that the instance object is passed as the first argument of the function. In our example, the call x.f() is exactly equivalent to MyClass.f(x). In general, calling a method with a list of n arguments is equivalent to calling the corresponding function with an argument list that is created by inserting the method’s instance object before the first argument.
+                                    </p>
+                                    <p>
+                                        If you still don’t understand how methods work, a look at the implementation can perhaps clarify matters. When a non-data attribute of an instance is referenced, the instance’s class is searched. If the name denotes a valid class attribute that is a function object, a method object is created by packing (pointers to) the instance object and the function object just found together in an abstract object: this is the method object. When the method object is called with an argument list, a new argument list is constructed from the instance object and the argument list, and the function object is called with this new argument list.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h1 id="class-variables" class="sub-sub-title">Class and Instance Variables</h1>
+                                </li>
+                            </ul>
                         </li>
                     </ol>
 
