@@ -86,11 +86,19 @@ color: slateblue;
 }
 .main-section{
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
     box-shadow: 2px 3px 4px 3px bisque;
 }
 code{
-
+    font-family: monospace;
+    font-size: 21px;
+    color: blue;
+}
+.code-div{
+    padding: 30px;
+    background-color:#f6f6f7;
+    border-radius: 9px;
+    box-shadow: 1px 1px 2px 1px #f6f6f6;
 }
 
 
