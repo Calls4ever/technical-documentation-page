@@ -4,8 +4,6 @@ body{
 }
 #nav-bar{
     width: 25%;
-    border-top: none;
-    border-left: none;
     position: fixed;
     box-shadow: 1px 2px 2px 1px silver;
    
@@ -95,6 +93,7 @@ code{
     color: blue;
 }
 .code-div{
+    margin: 13px;
     padding: 30px;
     background-color:#f6f6f7;
     border-radius: 9px;
@@ -123,4 +122,17 @@ code{
   #footer-links{
     display: flex;
     justify-content: space-around;
+  }
+  @media(max-width: 720px){
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+    #nav-bar{
+        width: 100%;
+        position: relative;
+    }
+    #main-doc{
+        margin: 10px
+    }
   }
