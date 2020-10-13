@@ -1,0 +1,98 @@
+body{
+    display: flex;
+    justify-content: space-between;
+}
+#nav-bar{
+    width: 25%;
+    border-top: none;
+    border-left: none;
+    position: fixed;
+    box-shadow: 1px 2px 2px 1px silver;
+   
+}
+.nav-header{
+    font-size: 44px;
+    font-family: 'Sora', sans-serif;
+    color: steelblue;
+    padding: 10px;
+}
+#nav-header-div{
+    background-color: 	bisque;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    
+    color: gray;
+}
+.nav-link{
+    font-size: 28px;
+    border-bottom-style: groove;
+    border-bottom-color: teal;
+    margin-bottom: 6.5px;
+    padding-bottom: 4px;
+}
+.nav-link-sub{
+    font-size: 24px;
+    border-bottom-style: groove;
+    border-bottom-color: teal;
+   
+}
+.nav-link-sub-li{
+    margin-bottom: 5.5px;
+    padding-bottom: 3px;
+}
+.nav-link-ul{
+    list-style: none;
+}
+.nav-a{
+    display: flex;
+    flex-direction: column;
+    padding: 13px;
+    
+}
+.nav-link:hover, .nav-link-sub:hover{
+    background-color: steelblue;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    
+}
+#main-doc{
+    margin-left: 27%;
+    margin-right: 2%;
+    margin-top: 0px;
+}
+.title{
+    font-size: 89px;
+    color: white;
+    font-family: 'Sora', sans-serif;
+}
+#title-div{
+    margin-top: -50px;
+    background: linear-gradient(90deg, teal 25%, white 90%);
+    border-radius: 53px;
+}
+section>ul,p{
+
+font-size: 24px;
+}
+.sub-title{
+    font-family: 'Roboto', sans-serif;
+    color: steelblue;
+    font-size: 57px;
+}
+.sub-sub-title{
+font-family: 'Roboto', sans-serif;
+font-size: 39px;
+font-weight: normal;
+color: slateblue;
+}
+.main-section{
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: 2px 3px 4px 3px bisque;
+}
+code{
+    
+}
