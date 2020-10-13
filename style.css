@@ -65,7 +65,7 @@ a{
 }
 .title{
     font-size: 89px;
-    color: white;
+    color: teal;
     font-family: 'Sora', sans-serif;
 }
 #title-div{
@@ -94,5 +94,29 @@ color: slateblue;
     box-shadow: 2px 3px 4px 3px bisque;
 }
 code{
-    
+
 }
+
+
+
+#footer-img{
+    max-width: 30px;
+  }
+  a{
+    text-decoration: none;
+  }
+  #footer{
+    background-color: bisque;
+    margin-top: 25px;
+    padding: 20px;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+  }
+  #footer-content{
+    font-size: 19px;
+    text-align: center;
+  }
+  #footer-links{
+    display: flex;
+    justify-content: space-around;
+  }
